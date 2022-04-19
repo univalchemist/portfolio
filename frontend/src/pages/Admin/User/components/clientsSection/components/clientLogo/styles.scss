@@ -1,0 +1,23 @@
+.user-clients-container {
+  .client-logo-container {
+    height: 130px;
+    width: 155px;
+    border: 1px dashed #ff014f50;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    .client-logo {
+      min-width: 100%;
+    }
+  
+    &:hover {
+      .edit-image-container {
+        opacity: 1;
+      }
+    }
+  }
+}

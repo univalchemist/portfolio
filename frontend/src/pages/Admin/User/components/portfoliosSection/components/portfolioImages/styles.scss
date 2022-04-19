@@ -1,0 +1,70 @@
+.portfolio-images-container {
+  min-height: 150px;
+
+  .drop-container > div {
+    height: 150px;
+  }
+
+  .image-item {
+    border: 1px dashed transparent;
+    border-radius: 3px;
+    &.dragging {
+      border-color: #ff014f;
+      opacity: 0.5;
+      .drag-handler {
+        opacity: 1;
+      }
+      & ~ .image-item {
+        border-color: #212428;
+      }
+    }
+    &:hover {
+      .drag-handler {
+        opacity: 1;
+      }
+    }
+  }
+
+  .portfolio-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    .portfolio-image {
+      min-width: 100%;
+      min-height: 100%;
+    }
+
+    &:hover {
+      .edit-image-container {
+        opacity: 1;
+      }
+    }
+  }
+
+  .portfolio-image-add {
+    position: relative;
+
+    &:hover {
+      .add-image-btn {
+        background-color: #2b2e32;
+      }
+    }
+    .add-image-btn {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      border-radius: 5px;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s linear;
+    }
+  }
+}

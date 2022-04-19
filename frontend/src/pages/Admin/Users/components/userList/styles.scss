@@ -1,0 +1,68 @@
+.users-table {
+    * {
+      color: #FFFFFF;
+    }
+    td {
+      font-size: 14px;
+      border-width: 0;
+      border-bottom: 1px solid #121415;
+      text-align: left;
+      user-select: none;
+    }
+    thead {
+      th {
+        text-align: left;
+        text-transform: none;
+        border-width: 0;
+        border-bottom: 1px solid #FFFFFF;
+        padding: 7px 10px;
+        user-select: none;
+  
+        &:last-of-type {
+          width: 140px;
+          text-align: right;
+        }
+      }
+    }
+    tbody {
+      tr {
+        transition: all 0.3s linear;
+        &:hover {
+          box-shadow: var(--shadow-2);
+  
+          td {
+            transition: all 0.3s linear;
+            background-color: #121415;
+          }
+        }
+      }
+    }
+    .user-name-row {
+      display: flex;
+      align-items: center;
+  
+      .user-avatar {
+        width: 40px;
+        height: 40px;
+      }
+      .user-name {
+        flex: 1;
+        text-align: left;
+      }
+    }
+    .action-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    
+      .user-action-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        margin: 0 5px;
+      }
+    }
+  }

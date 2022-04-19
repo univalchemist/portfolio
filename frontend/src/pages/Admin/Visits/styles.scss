@@ -1,0 +1,104 @@
+.visits-page {
+  .charts-container {
+    .visit-chart-container {
+      height: 300px;
+      flex-grow: 1;
+  
+      @media screen and (max-width: 991px) {
+        width: 100%;
+      }
+    }
+    .visit-platform-chart-container {
+      height: 300px;
+      width: 500px;
+    }
+  }
+  .admins-select-container, .users-select-container {
+    @media screen and (max-width: 991px) {
+      width: 100%;
+    }
+  }
+  .delete-button-container {
+    background-color: #212428;
+    z-index: 1;
+    height: 45px;
+    display: flex;
+    padding-top: 5px;
+    justify-content: flex-end;
+    @media screen and (min-width: 992px) {
+      position: sticky;
+      top: 0;
+    }
+    .visit-action-button {
+      padding: 0;
+      width: 100px;
+      height: 35px;
+  
+      .visit-button-text {
+        font-size: 16px;
+      }
+    }
+  }
+  .visits-table-container {
+    * {
+      color: #FFFFFF;
+    }
+    thead {
+      border-bottom: 1px solid #FFFFFF;
+      background: #212428;
+      box-shadow: 0 10px 0 #1c1e22, 0 -10px -10px #262a2e !important;
+      z-index: 1;
+      @media screen and (min-width: 992px) {
+        position: sticky;
+        top: 45px;
+      }
+    }
+    .check-visit {
+      .form-check {
+        padding-left: 0;
+      }
+      input[type=checkbox] {
+        margin-top: 0 !important;
+
+        & ~ label::before, & ~ label::after {
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+    }
+    td {
+      font-size: 14px;
+      border-width: 0;
+      border-bottom: 1px solid #121415;
+      text-align: left;
+      user-select: none;
+    }
+    thead {
+      th {
+        text-align: left;
+        text-transform: none;
+        border-width: 0;
+        padding: 7px 10px;
+        user-select: none;
+  
+        &:last-of-type {
+          width: 140px;
+          text-align: right;
+        }
+      }
+    }
+    tbody {
+      tr {
+        transition: all 0.3s linear;
+        &:hover {
+          box-shadow: var(--shadow-2);
+  
+          td {
+            transition: all 0.3s linear;
+            background-color: #121415;
+          }
+        }
+      }
+    }
+  }
+}

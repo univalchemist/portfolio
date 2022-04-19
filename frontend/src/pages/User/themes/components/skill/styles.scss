@@ -1,0 +1,15 @@
+.progress-wrapper {
+  min-width: 25%;
+  flex: 1;
+  border-bottom: 1px dashed #121415;
+  border-right: none;
+
+  &:last-of-type {
+    border-color: transparent;
+  }
+
+  @media (min-width: 992px) {
+    border-right: 1px dashed #ffffff1a;
+    border-bottom: none;
+  }
+}

@@ -1,0 +1,561 @@
+fragment Image on Image {
+  id
+  index
+  path
+  url
+}
+
+fragment Portfolio on Portfolio {
+  id
+  userId
+  index
+  category
+  title
+  description
+  view
+  like
+  images {
+    ...Image
+  }
+  techStacks
+  createdAt
+  updatedAt
+}
+
+fragment UserLink on UserLink {
+  index
+  name
+  url
+  visible
+}
+
+fragment Education on Education {
+  index
+  startedFrom
+  endedAt
+  title
+  at
+  description
+  degree
+  visible
+}
+
+fragment Skill on Skill {
+  index
+  name
+  category
+  rate
+  visible
+}
+
+fragment Experience on Experience {
+  index
+  startedFrom
+  endedAt
+  title
+  at
+  description
+  visible
+}
+
+fragment Interest on Interest {
+  index
+  title
+  description
+}
+
+fragment Feature on Feature {
+  id
+  userId
+  index
+  title
+  description
+  icon
+  createdAt
+  updatedAt
+}
+
+fragment Resume on Resume {
+  id
+  userId
+  description
+  education {
+    ...Education
+  }
+  skills {
+    ...Skill
+  }
+  experience {
+    ...Experience
+  }
+  interests {
+    ...Interest
+  }
+  createdAt
+  updatedAt
+}
+
+fragment Client on Client {
+  id
+  userId
+  index
+  name
+  clientInfo
+  logo {
+    ...Image
+  }
+  url
+  feedback
+  visible
+  createdAt
+  updatedAt
+}
+
+fragment User on User {
+  id
+  slug
+  firstName
+  middleName
+  lastName
+  email
+  phone
+  address
+  title
+  slogan
+  avatar {
+    ...Image
+  }
+  availability
+  bio
+  backgroundImages {
+    ...Image
+  }
+  links {
+    index
+    name
+    url
+    visible
+  }
+  active
+  createdAt
+  updatedAt
+}
+
+fragment Contact on Contact {
+  id
+  userId
+  user {
+    email
+    firstName
+    middleName
+    lastName
+  }
+  name
+  email
+  message
+  seen
+  ref
+  createdAt
+  updatedAt
+}
+
+fragment Visit on Visit {
+  id
+  from
+  userId
+  userSeen
+  userAgent
+  adminCreatedEmail
+  createdAt
+  updatedAt
+}
+
+fragment Admin on Admin {
+  id
+  email
+  type
+  tgChatId
+  createdAt
+  updatedAt
+}
+
+fragment SettingConfig on SettingConfig {
+  setting {
+    id
+    links {
+      key
+      value
+    }
+    other {
+      key
+      value
+    }
+    createdAt
+    updatedAt
+  }
+  config {
+    dropBoxToken
+    telegramToken
+  }
+}
+
+mutation SignIn($email: String, $password: String, $accessToken: String) {
+  signIn(email: $email, password:  $password, accessToken: $accessToken) {
+    status
+    message
+    data {
+      accessToken
+      admin {
+        ...Admin
+      }
+    }
+  }
+}
+
+mutation CreateAdmin($input: AdminInput!) {
+  createAdmin(input: $input) {
+    message
+    status
+    data {
+      ...Admin
+    }
+  }
+}
+
+mutation UpdateAdmin($id: String!, $input: AdminInput!) {
+  updateAdmin(id: $id, input: $input) {
+    message
+    status
+    data {
+      ...Admin
+    }
+  }
+}
+
+mutation UpsertAdmin($input: AdminInput!) {
+  upsertAdmin(input: $input) {
+    status
+    message
+    data {
+      ...Admin
+    }
+  }
+}
+
+mutation DeleteAdmin($id: String!) {
+  deleteAdmin(id: $id) {
+    status
+    message
+  }
+}
+
+mutation SetTGChatId($id: String!, $chatId: String) {
+  setTGChatId(id: $id, chatId: $chatId) {
+    message
+    status
+  }
+}
+
+mutation CreateUser($input: UserInput!, $avatar: Uploads, $backgroundImages: [Uploads!]) {
+  createUser(input: $input, avatar: $avatar, backgroundImages: $backgroundImages) {
+    status
+    message
+    data {
+      ...User
+      createdBy
+    }
+  }
+}
+
+mutation UpdateUser($id: String!, $input: UserInput!, $avatar: Uploads, $backgroundImages: [Uploads!]) {
+  updateUser(id: $id, input: $input, avatar: $avatar, backgroundImages: $backgroundImages) {
+    status
+    message
+    data {
+      ...User
+      createdBy
+    }
+  }
+}
+
+mutation DuplicateUser($id: String!) {
+  duplicateUser(id: $id) {
+    status
+    message
+    data {
+      ...User
+      createdBy
+    }
+  }
+}
+
+mutation DeleteUser($id: String!) {
+  deleteUser(id: $id) {
+    status
+    message
+  }
+}
+
+mutation DeleteFreeUsers {
+  deleteFreeUsers {
+    status
+    message
+  }
+}
+
+mutation CreateFeature($input: FeatureInput!) {
+  createFeature(input: $input) {
+    status
+    message
+    data {
+      ...Feature
+    }
+  }
+}
+
+mutation UpdateFeature($id: String!, $input: FeatureInput!) {
+  updateFeature(id: $id, input: $input) {
+    status
+    message
+    data {
+      ...Feature
+    }
+  }
+}
+
+mutation UpsertFeatures($input: [FeatureInput!]!) {
+  upsertFeatures(input: $input) {
+    status
+    message
+    data {
+      ...Feature
+    }
+  }
+}
+
+mutation DeleteFeature($id: String!) {
+  deleteFeature(id: $id) {
+    status
+    message
+  }
+}
+
+mutation CreatePortfolio($input: PortfolioInput!) {
+  createPortfolio(input: $input) {
+    status
+    message
+    data {
+      ...Portfolio
+    }
+  }
+}
+
+mutation UpdatePortfolio($id: String!, $input: PortfolioInput!) {
+  updatePortfolio(id: $id, input: $input) {
+    status
+    message
+    data {
+      ...Portfolio
+    }
+  }
+}
+
+mutation UpsertPortfolios($input: [PortfolioInput!]!) {
+  upsertPortfolios(input: $input) {
+    status
+    message
+    data {
+      ...Portfolio
+    }
+  }
+}
+
+mutation IncreasePortfolioViews($id: String!) {
+  increasePortfolioViews(id: $id) {
+    status
+    message
+    data {
+      index
+      like
+      view
+    }
+  }
+}
+
+mutation IncreasePortfolioLikes($id: String!) {
+  increasePortfolioLikes(id: $id) {
+    status
+    message
+    data {
+      index
+      like
+      view
+    }
+  }
+}
+
+mutation DeletePortfolio($id: String!) {
+  deletePortfolio(id: $id) {
+    status
+    message
+  }
+}
+
+mutation CreateResume($input: ResumeInput!) {
+  createResume(input: $input) {
+    status
+    message
+    data {
+      ...Resume
+    }
+  }
+}
+
+mutation updateResume($id: String!, $input: ResumeInput!) {
+  updateResume(id: $id, input: $input) {
+    status
+    message
+    data {
+      ...Resume
+    }
+  }
+}
+
+mutation upsertResume($input: ResumeInput!) {
+  upsertResume(input: $input) {
+    status
+    message
+    data {
+      ...Resume
+    }
+  }
+}
+
+mutation DeleteResume($id: String!) {
+  deleteResume(id: $id) {
+    status
+    message
+  }
+}
+
+mutation CreateClient($input: ClientInput!) {
+  createClient(input: $input) {
+    status
+    message
+    data {
+      ...Client
+    }
+  }
+}
+
+mutation UpdateClient($id: String!, $input: ClientInput!) {
+  updateClient(id: $id, input: $input) {
+    status
+    message
+    data {
+      ...Client
+    }
+  }
+}
+
+mutation UpsertClients($input: [ClientInput!]!) {
+  upsertClients(input: $input) {
+    status
+    message
+    data {
+      ...Client
+    }
+  }
+}
+
+mutation DeleteClient($id: String!) {
+  deleteClient(id: $id) {
+    status
+    message
+  }
+}
+
+mutation CreateSetting($input: SettingInput!) {
+  createSetting(input: $input) {
+    status
+    message
+    data {
+      ...SettingConfig
+    }
+  }
+}
+
+mutation UpdateSetting($id: String!, $input: SettingInput!) {
+  updateSetting(id: $id, input: $input) {
+    status
+    message
+    data {
+      ...SettingConfig
+    }
+  }
+}
+
+mutation UpsertSetting($input: SettingInput!) {
+  upsertSetting(input: $input) {
+    status
+    message
+    data {
+      ...SettingConfig
+    }
+  }
+}
+
+mutation DeleteSetting($id: String!) {
+  deleteSetting(id: $id) {
+    status
+    message
+  }
+}
+
+mutation CreateContact($input: ContactInput!) {
+  createContact(input: $input) {
+    status
+    message
+  }
+}
+
+mutation UpdateContact($id: String!, $input: ContactInput!) {
+  updateContact(id: $id, input: $input) {
+    status
+    message
+    data {
+      ...Contact
+    }
+  }
+}
+
+mutation DeleteContact($id: String!) {
+  deleteContact(id: $id) {
+    status
+    message
+  }
+}
+
+mutation MakeContactSeen($id: String!) {
+  makeContactSeen(id: $id) {
+    status
+    message
+    data {
+      ...Contact
+    }
+  }
+}
+
+mutation CreateVisit($input: VisitInput!) {
+  createVisit(input: $input) {
+    status
+    message
+  }
+}
+
+mutation DeleteVisits($ids: [String!]) {
+  deleteVisits(ids: $ids) {
+    status
+    message
+  }
+}

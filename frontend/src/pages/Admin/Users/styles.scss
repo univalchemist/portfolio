@@ -1,0 +1,64 @@
+.sharable-link-modal {
+  max-height: 75vh;
+  overflow-y: auto;
+
+  .links-row {
+    border-bottom: 1px dashed var(--color-tertiary);
+    padding-bottom: 10px;
+  }
+  .link-label {
+    color: var(--color-white);
+    font-size: 18px;
+  }
+  .link-description {
+    font-size: 14px;
+  }
+  .theme-item-container {
+    cursor: pointer;
+    width: 25%;
+    padding: 7px;
+    .theme-item {
+      border: 2px solid transparent;
+      box-shadow: var(--shadow-1);
+      border-radius: 5px;
+      overflow: hidden;
+      &.theme-selected {
+        border-color: var(--color-info);
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .sharable-link {
+    border: 1px dashed var(--color-secondary);
+    border-radius: 5px;
+
+    .copy-button {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    a {
+      text-decoration: none !important;
+      color: var(--color-primary);
+      font-size: 15px;
+      padding-right: 50px;
+      transition: all .2s linear;
+      word-break: break-all;
+
+      &:hover {
+        color: var(--color-white);
+      }
+    }
+    input.link-value {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      margin: 0;
+    }
+  }
+}

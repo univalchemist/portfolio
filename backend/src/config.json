@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "dropBoxToken": "RYR5wLdT-E4AAAAAAAAAAa-DbLNsFuqSta8yfhjHz47kkUNUYks_xw88vn2_N78v",
+    "telegramToken": "5282750286:AAFS9ILCOmc4jSvbSKZHiFxDOkA_ZPjnXXU"
+  },
+  "prod": {
+    "dropBoxToken": "wBH9aK7Y1OcAAAAAAAAAAQ-MX154o2LU6RwgfRp38oevwWhmA37gyiH1m_gXzztg",
+    "telegramToken": "5179929487:AAESRi9bL-2xr5WRYK-0QENFbDG0bFBcm00"
+  }
+}

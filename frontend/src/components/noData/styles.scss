@@ -1,0 +1,12 @@
+.no-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .no-data-text {
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+  }
+}

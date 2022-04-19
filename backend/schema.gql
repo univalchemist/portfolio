@@ -1,0 +1,564 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Admin {
+  id: ID!
+  email: String!
+  type: AdminType
+  tgChatId: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum AdminType {
+  Admin
+  SuperAdmin
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type SignIn {
+  accessToken: String!
+  admin: Admin!
+}
+
+type SignInResponse {
+  data: SignIn
+  message: String!
+  status: Boolean!
+}
+
+type AdminResponse {
+  data: Admin
+  message: String!
+  status: Boolean!
+}
+
+type AdminsResponse {
+  data: [Admin!]!
+  message: String!
+  status: Boolean!
+}
+
+type Image {
+  id: String!
+  index: Float
+  path: String!
+  url: String!
+}
+
+type UserLink {
+  index: Float!
+  name: ExternalLink!
+  url: String!
+  visible: Boolean!
+}
+
+enum ExternalLink {
+  Angel
+  Facebook
+  Freelancer
+  Fiverr
+  Github
+  Gun
+  Guru
+  Indeed
+  LinkedIn
+  PeoplePerHour
+  TopCoder
+  Twitter
+  Upwork
+  Other
+}
+
+type User {
+  id: ID!
+  slug: String!
+  firstName: String!
+  middleName: String
+  lastName: String!
+  email: String!
+  phone: String
+  address: String
+  title: String!
+  slogan: String
+  avatar: Image
+  bio: String!
+  availability: String
+  backgroundImages: [Image!]!
+  links: [UserLink!]!
+  active: Boolean!
+  createdBy: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type UserResponse {
+  data: User
+  message: String!
+  status: Boolean!
+}
+
+type UsersResponse {
+  data: [User!]!
+  message: String!
+  status: Boolean!
+}
+
+type Feature {
+  id: ID!
+  userId: String!
+  index: Float!
+  title: String!
+  description: String
+  icon: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type FeatureResponse {
+  data: Feature
+  message: String!
+  status: Boolean!
+}
+
+type FeaturesResponse {
+  data: [Feature!]!
+  message: String!
+  status: Boolean!
+}
+
+type Portfolio {
+  id: ID!
+  userId: String!
+  index: Float!
+  category: PortfolioCategory!
+  title: String!
+  description: String!
+  view: Float!
+  like: Float!
+  images: [Image!]!
+  techStacks: [String!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+enum PortfolioCategory {
+  Web
+  Mobile
+}
+
+type PortfolioResponse {
+  data: Portfolio
+  message: String!
+  status: Boolean!
+}
+
+type PortfoliosResponse {
+  data: [Portfolio!]!
+  message: String!
+  status: Boolean!
+}
+
+type Education {
+  index: Float!
+  startedFrom: String!
+  endedAt: String
+  title: String
+  at: String!
+  description: String
+  degree: String
+  visible: Boolean!
+}
+
+type Skill {
+  index: Float!
+  name: String!
+  category: SkillCategory!
+  rate: Float!
+  visible: Boolean!
+}
+
+enum SkillCategory {
+  Frontend
+  Backend
+  Mobile
+  Other
+}
+
+type Experience {
+  index: Float!
+  startedFrom: String!
+  endedAt: String
+  title: String
+  at: String!
+  description: String
+  visible: Boolean!
+}
+
+type Interest {
+  index: Float!
+  title: String!
+  description: String
+}
+
+type Resume {
+  id: ID!
+  userId: String!
+  description: String
+  education: [Education!]!
+  skills: [Skill!]!
+  experience: [Experience!]!
+  interests: [Interest!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ResumeResponse {
+  data: Resume
+  message: String!
+  status: Boolean!
+}
+
+type Client {
+  id: ID!
+  userId: String!
+  index: Float!
+  name: String!
+  clientInfo: String
+  logo: Image
+  url: String
+  feedback: String
+  visible: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ClientResponse {
+  data: Client
+  message: String!
+  status: Boolean!
+}
+
+type ClientsResponse {
+  data: [Client!]!
+  message: String!
+  status: Boolean!
+}
+
+type SettingLink {
+  key: ExternalLink!
+  value: Float!
+}
+
+type Other {
+  key: String!
+  value: Float!
+}
+
+type Config {
+  dropBoxToken: String!
+  telegramToken: String
+}
+
+type Setting {
+  id: ID!
+  links: [SettingLink!]
+  other: [Other!]
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type SettingConfig {
+  setting: Setting
+  config: Config
+}
+
+type SettingResponse {
+  data: SettingConfig
+  message: String!
+  status: Boolean!
+}
+
+type Contact {
+  id: ID!
+  userId: String!
+  user: User
+  name: String
+  email: String!
+  message: String
+  seen: Boolean!
+  ref: ExternalLink
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type ContactResponse {
+  data: Contact
+  message: String!
+  status: Boolean!
+}
+
+type ContactsResponse {
+  data: [Contact!]!
+  message: String!
+  status: Boolean!
+}
+
+type Visit {
+  id: ID!
+  from: ExternalLink!
+  userId: String!
+  userSeen: String!
+  userAgent: String!
+  adminCreatedEmail: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type VisitResponse {
+  data: Visit
+  message: String!
+  status: Boolean!
+}
+
+type VisitsResponse {
+  data: [Visit!]!
+  message: String!
+  status: Boolean!
+}
+
+type Query {
+  admins: AdminsResponse!
+  admin(id: String!): AdminResponse!
+  users(createdBy: String): UsersResponse!
+  user(idOrSlug: String!): UserResponse!
+  features(userIdOrSlug: String!): FeaturesResponse!
+  portfolios(userIdOrSlug: String!): PortfoliosResponse!
+  resume(visible: Boolean, userIdOrSlug: String!): ResumeResponse!
+  clients(visible: Boolean, userIdOrSlug: String!): ClientsResponse!
+  contacts(onlyNew: Boolean): ContactsResponse!
+  setting: SettingResponse!
+  visits(dateRange: [String!], userId: String, createdBy: String): VisitsResponse!
+}
+
+type Mutation {
+  signIn(accessToken: String, password: String, email: String): SignInResponse!
+  createAdmin(input: AdminInput!): AdminResponse!
+  updateAdmin(input: AdminInput!, id: String!): AdminResponse!
+  upsertAdmin(input: AdminInput!): AdminResponse!
+  deleteAdmin(id: String!): AdminResponse!
+  setTGChatId(chatId: String, id: String!): AdminResponse!
+  createUser(backgroundImages: [Uploads!], avatar: Uploads, input: UserInput!): UserResponse!
+  updateUser(backgroundImages: [Uploads!], avatar: Uploads, input: UserInput!, id: String!): UserResponse!
+  updateAvatar(avatar: Uploads!, id: String!): UserResponse!
+  duplicateUser(id: String!): UserResponse!
+  deleteUser(id: String!): UserResponse!
+
+  """Delete users who does not belong to any admin."""
+  deleteFreeUsers: UserResponse!
+  createFeature(input: FeatureInput!): FeatureResponse!
+  updateFeature(input: FeatureInput!, id: String!): FeatureResponse!
+  upsertFeatures(input: [FeatureInput!]!): FeaturesResponse!
+  deleteFeature(id: String!): FeatureResponse!
+  createPortfolio(input: PortfolioInput!): PortfolioResponse!
+  updatePortfolio(input: PortfolioInput!, id: String!): PortfolioResponse!
+  upsertPortfolios(input: [PortfolioInput!]!): PortfoliosResponse!
+  deletePortfolio(id: String!): PortfolioResponse!
+  increasePortfolioViews(id: String!): PortfolioResponse!
+  increasePortfolioLikes(id: String!): PortfolioResponse!
+  createResume(input: ResumeInput!): ResumeResponse!
+  updateResume(input: ResumeInput!, id: String!): ResumeResponse!
+  upsertResume(input: ResumeInput!): ResumeResponse!
+  deleteResume(id: String!): ResumeResponse!
+  createClient(input: ClientInput!): ClientResponse!
+  updateClient(input: ClientInput!, id: String!): ClientResponse!
+  upsertClients(input: [ClientInput!]!): ClientsResponse!
+  deleteClient(id: String!): ClientResponse!
+  createContact(input: ContactInput!): ContactResponse!
+  updateContact(input: ContactInput!, id: String!): ContactResponse!
+  deleteContact(id: String!): ContactResponse!
+  makeContactSeen(id: String!): ContactResponse!
+  createSetting(input: SettingInput!): SettingResponse!
+  updateSetting(input: SettingInput!, id: String!): SettingResponse!
+  upsertSetting(input: SettingInput!): SettingResponse!
+  deleteSetting(id: String!): SettingResponse!
+  createVisit(input: VisitInput!): VisitResponse!
+
+  """Delete users who does not belong to any admin."""
+  deleteVisits(ids: [String!]): VisitResponse!
+}
+
+input AdminInput {
+  id: String
+  email: String
+  password: String
+  type: AdminType = Admin
+}
+
+input Uploads {
+  id: String
+  index: Float = 0
+  file: Upload
+  prevPath: String
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input UserInput {
+  slug: String!
+  firstName: String!
+  middleName: String
+  lastName: String!
+  email: String!
+  phone: String
+  address: String
+  title: String!
+  availability: String
+  backgroundImages: [ImageInput!] = []
+  slogan: String
+  bio: String!
+  links: [UserLinkInput!] = []
+  active: Boolean = true
+}
+
+input ImageInput {
+  id: String!
+  index: Float = 0
+  path: String!
+  url: String!
+}
+
+input UserLinkInput {
+  index: Float!
+  name: ExternalLink!
+  url: String!
+  visible: Boolean!
+}
+
+input FeatureInput {
+  id: String
+  userId: String
+  index: Float = 0
+  title: String!
+  description: String
+  icon: String
+}
+
+input PortfolioInput {
+  id: String
+  userId: String!
+  index: Float!
+  category: PortfolioCategory!
+  title: String!
+  description: String
+  view: Float = 0
+  like: Float = 0
+  images: [ImageInput!] = []
+  techStacks: [String!] = []
+  newImages: [Uploads!]
+}
+
+input ResumeInput {
+  id: String
+  userId: String!
+  description: String
+  education: [EducationInput!] = []
+  skills: [SkillInput!] = []
+  experience: [ExperienceInput!] = []
+  interests: [InterestInput!] = []
+}
+
+input EducationInput {
+  index: Float!
+  startedFrom: String!
+  endedAt: String
+  title: String
+  at: String!
+  description: String
+  degree: String
+  visible: Boolean = true
+}
+
+input SkillInput {
+  index: Float!
+  name: String!
+  category: SkillCategory!
+  rate: Float!
+  visible: Boolean = true
+}
+
+input ExperienceInput {
+  index: Float!
+  startedFrom: String!
+  endedAt: String
+  title: String
+  at: String!
+  description: String
+  visible: Boolean = true
+}
+
+input InterestInput {
+  index: Float!
+  title: String!
+  description: String
+}
+
+input ClientInput {
+  id: String
+  userId: String
+  index: Float = 0
+  name: String!
+  clientInfo: String
+  logo: ImageInput
+  url: String
+  feedback: String
+  visible: Boolean = true
+  newLogo: Uploads
+}
+
+input ContactInput {
+  userId: String!
+  name: String
+  email: String!
+  message: String
+  ref: ExternalLink
+}
+
+input SettingInput {
+  id: String
+  links: [SettingLinkInput!]
+  other: [OtherInput!]
+  config: ConfigInput
+}
+
+input SettingLinkInput {
+  key: ExternalLink!
+  value: Float!
+}
+
+input OtherInput {
+  key: String!
+  value: Float!
+}
+
+input ConfigInput {
+  dropBoxToken: String!
+  telegramToken: String
+}
+
+input VisitInput {
+  from: ExternalLink!
+  userAgent: String!
+  userId: String!
+}
+
+type Subscription {
+  tgChatIdUpdated: Admin
+  contactAdded: Contact
+}

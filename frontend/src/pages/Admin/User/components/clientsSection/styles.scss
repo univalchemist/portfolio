@@ -1,0 +1,34 @@
+.user-clients-container {
+  .clients-dragging {
+    background-color: #2b2e32;
+  }
+  .client-row {
+    border: 1px dashed transparent;
+    border-radius: 3px;
+    &.dragging {
+      border-color: #ff014f;
+      opacity: 0.5;
+      .drag-handler {
+        opacity: 1;
+      }
+      & ~ .client-row {
+        border-color: #212428;
+      }
+    }
+    &:hover {
+      .client-toolbar {
+        opacity: 1;
+      }
+      .drag-handler {
+        opacity: 1;
+      }
+    }
+    .client-toolbar {
+      position: absolute;
+      opacity: 0;
+      top: 50px;
+      left: calc(100% - 15px);
+      transition: all 0.2s linear;
+    }
+  }
+}

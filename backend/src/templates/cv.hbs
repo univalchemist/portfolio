@@ -1,0 +1,469 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="telephone=no" name="format-detection">
+    <title>User CV</title>
+    <style type="text/css">
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        font-family: "Montserrat",sans-serif;
+      }
+      .cv-root {
+        height: 100%;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0 auto;
+        display: flex;
+      }
+      .left-section {
+        width: 40%;
+        height: 100%;
+        min-height: 297mm;
+        padding-top: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 20px;
+        background-color: #212428fa;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+      }
+      .left-section > div {
+        z-index: 1;
+      }
+      .left-overlay {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        background-image: url('https://www.dropbox.com/s/axik2gh5ea5qwji/CV-background.png?dl=0&raw=1');
+        background-position: 0 0;
+        background-size: contain;
+        left: 0;
+        top: 0;
+        z-index: 0 !important;
+        opacity: 0.7;
+      }
+      .avatar-container {
+        width: 175px;
+        height: 175px;
+        border-radius: 100px;
+        background-size: 175px;
+        background-position: 0 0;
+        overflow: hidden;
+      }
+      .user-avatar {
+        height: 100%;
+        width: 100%;
+      }
+      .user-slogan {
+        font-size: 16px;
+        color: #c4cfde;
+        padding: 15px 0;
+      }
+      .user-name {
+        font-size: 20px;
+        color: #FFFFFF;
+        font-weight: 600;
+        padding: 5px 0;
+      }
+      .user-title {
+        font-size: 18px;
+        color: #c4cfde;
+        padding: 5px 0;
+      }
+      .divider {
+        width: 100%;
+        height: 1px;
+        background-color: #878e99;
+        margin: 15px 0;
+      }
+      .about-title {
+        font-size: 18px;
+        color: #FFFFFF;
+        padding: 5px 0 10px;
+        text-align: left;
+        width: 100%;
+        text-transform: capitalize;
+      }
+      .user-bio {
+        font-size: 15px;
+        line-height: 22px;
+        color: #c4cfde;
+        padding: 5px 0;
+        text-align: left;
+        width: 100%;
+      }
+      .website-link {
+        color: #00adef;
+      }
+      .contact-area {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 30px 0px 10px;
+      }
+      .contact-title {
+        font-size: 18px;
+        color: #FFFFFF;
+        padding: 5px 0 10px;
+        text-align: left;
+        width: 100%;
+        text-transform: capitalize;
+      }
+      .contact-row {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        padding: 5px 10px;
+      }
+      .contact-info {
+        font-size: 15px;
+        flex: 1;
+        text-align: right;
+        color: #c4cfde;
+      }
+      .social-row {
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        padding: 0 5px;
+      }
+      .social-link {
+        height: 45px;
+        width: 45px;
+        background: linear-gradient(145deg,#1e2024,#23272b);
+        border-radius: 6px;
+        box-shadow: 10px 10px 19px #1c1e22,-10px -10px 19px #262a2e;
+        display: inline-block;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 5px;
+      }
+      .social-link::before {
+        background: linear-gradient(to right bottom,#212428,#16181c);
+        border-radius: 6px;
+        content: "";
+        height: 100%;
+        left: 0;
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        transition: var(--transition);
+        width: 100%;
+        z-index: -1;
+      }
+      .interests-area {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 30px 0px 10px;
+      }
+      .interests-title {
+        font-size: 20px;
+        color: #FFFFFF;
+        padding: 5px 0 10px;
+        text-align: left;
+        width: 100%;
+        text-transform: capitalize;
+      }
+      .interests-row {
+        padding: 5px 5px;
+      }
+      .interest {
+        width: 100%;
+        text-align: left;
+        color: #FFFFFF;
+        position: relative;
+        padding-left: 15px;
+        font-size: 14px;
+      }
+      .interest::before {
+        content: ' ';
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 5px;
+        left: 0;
+        top: 6px;
+        background-color: #FFFFFF;
+      }
+      /*  */
+
+      .right-section {
+        background-color: #ecf0f3;
+        width: 60%;
+        padding-top: 50px;
+        padding-left: 30px;
+        padding-right: 20px;
+        padding-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+      .field-area {
+        width: 100%;
+        padding: 25px 15px 15px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        border-radius: 3px;
+        border: 1.5px solid #878e99;
+        margin-bottom: 35px;
+      }
+      .field-title {
+        font-size: 18px;
+        color: #1e2125;
+        font-weight: bold;
+        padding: 3px 15px;
+        background-color: #F8F9F9;
+        border-radius: 3px;
+        position: absolute;
+        top: 0;
+        transform: translateY(-50%);
+        left: 15px;
+        text-transform: capitalize;
+      }
+      .field-category {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1ba2db;
+        padding-bottom: 10px;
+      }
+      .field-row {
+        padding-bottom: 15px;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+      }
+      .field-row.with-category {
+        padding-left: 20px;
+        padding-bottom: 10px;
+      }
+      .field-info-title {
+        font-size: 16px;
+        color: #3c3e41;
+        font-weight: 600;
+        padding-bottom: 3px;
+      }
+      .field-progress-title {
+        font-size: 12px;
+        color: #1e2125;
+        padding-bottom: 5px;
+      }
+      .field-info-subtitle {
+        font-size: 15px;
+        color: #3c3e41;
+        padding-left: 10px;
+        margin-bottom: 3px;
+      }
+      .field-info-badge {
+        font-size: 12px;
+        font-weight: bold;
+        color: #1ba2db;
+        margin-left: 10px;
+      }
+      .field-info-desc {
+        font-size: 15px;
+        color: #1e2125;
+        margin-left: 10px;
+        padding-top: 5px;
+      }
+      .progress {
+        background-color: #dce1e4;
+        box-shadow: none;
+        border-radius: 7px;
+        height: 7px;
+        overflow: visible;
+        display: flex
+      }
+      .progress-bar {
+        background: linear-gradient(145deg,#ffffff 0, #00adef 100%);
+        border-radius: 7px;
+        overflow: visible;
+        position: relative;
+        display: flex;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="cv-root">
+    <div class="left-section">
+      <div class="left-overlay"></div>
+      <div class="avatar-container" style="background-image: url('{{data.avatar}}')"></div>
+      <!-- if slogan -->
+      {{#if data.slogan}}
+        <div class="user-slogan">{{data.slogan}}</div>
+      {{/if}}
+      <div class="user-name">{{data.userName}}</div>
+      <div class="user-title">{{data.title}}</div>
+      <div class="divider"></div>
+      <span class="about-title">About</span>
+      <div class="user-bio">{{data.bio}}</div>
+      {{#if data.profileUrl}}
+        <div class="user-bio">Know me more <a href="{{data.profileUrl}}" target="_blank" class="website-link">Here</a>.</div>
+      {{/if}}
+      <div class="contact-area">
+        <span class="contact-title">Contact Info</span>
+        <!-- if phone -->
+        {{#if data.phone}}
+          <div class="contact-row">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none" 
+              stroke="#c4cfde"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-phone">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span class="contact-info">{{data.phone}}</span>
+          </div>
+        {{/if}}
+        <div class="contact-row">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#c4cfde"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
+          <span class="contact-info">{{data.email}}</span>
+        </div>
+        <!-- if address -->
+        {{#if data.address}}
+          <div class="contact-row">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#c4cfde"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-home">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <span class="contact-info">{{data.address}}</span>
+          </div>
+        {{/if}}
+      </div>
+      <!-- if linkedin -->
+        <div class="contact-area">
+          <span class="contact-title">Find with me</span>
+          <div class="social-row">
+            {{#if data.linkedIn}}
+              <a href="{{data.linkedin}}" class="social-link">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="#c4cfde"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-linkedin">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                  <rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle>
+                </svg>
+              </a>
+            {{/if}}
+          </div>
+        </div>
+      {{#if data.interests}}
+        <div class="interests-area">
+          <span class="interests-title">Interests</span>
+          <!-- if interests, for loop -->
+          {{#each data.interests as |interest|}}
+            <div class="interests-row">
+              <div class="interest">{{interest}}</div>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+    </div>
+    <div class="right-section">
+      {{#if data.education}}
+        <div class="field-area">
+          <div class="field-title">Education</div>
+          <!-- education loop -->
+          {{#each data.education as |education|}}
+            <div class="field-row">
+              <div class="field-info-title">{{education.at}}</div>
+              <div class="field-info-subtitle">
+                {{education.duration}}
+              <!-- If degree -->
+              {{#if education.degree}}
+                <span class="field-info-badge">{{education.degree}}</span>
+              {{/if}}
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      {{/if}}
+      {{#if data.experience}}
+      <div class="field-area">
+        <div class="field-title">Experience</div>
+        <!-- experience loop -->
+        {{#each data.experience as |experience|}}
+          <div class="field-row">
+            <div class="field-info-title">{{experience.title}}</div>
+            <div class="field-info-subtitle">{{experience.at}} ({{experience.duration}})</div>
+            <!-- If description -->
+            {{#if experience.description}}
+              <div class="field-info-desc">{{experience.description}}</div>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+      {{/if}}
+      {{#if data.skills}}
+      <div class="field-area">
+        <div class="field-title">Skills</div>
+        {{#each data.skills as |skill|}}
+          <div class="field-category">- {{skill.category}}</div>
+          <!-- skill loop -->
+          {{#each skill.data as |skillData|}}
+            <div class="field-row with-category">
+              <div class="field-progress-title">{{skillData.name}}</div>
+              <div class="progress">
+                <div class="progress-bar" style="width: {{skillData.rate}}%"></div>
+              </div>
+            </div>
+          {{/each}}
+        {{/each}}
+      </div>
+      {{/if}}
+    </div>
+  </div>
+</body>
+
+</html>

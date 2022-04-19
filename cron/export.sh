@@ -1,0 +1,1 @@
+sudo mongodump --db fintechDB --out /var/opt/`date +"%m-%d-%y"`

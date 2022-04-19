@@ -1,0 +1,24 @@
+.container404 {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-wrap: wrap;
+
+  .text404 {
+    text-align: center;
+    width: 100%;
+    font-size: 108px;
+    font-weight: bolder;
+    color: #ffffff;
+  }
+
+  .text404-sub {
+    text-align: center;
+    width: 100%;
+    font-size: 32;
+    color: #ffffff;
+  }
+}

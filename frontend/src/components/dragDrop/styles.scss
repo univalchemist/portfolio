@@ -1,0 +1,11 @@
+.drop-container {
+  border-radius: 5px;
+  &.item-dragging {
+    background-color: #2b2e32;
+  }
+  .drag-container {
+    &.dragging {
+      opacity: 0.5;
+    }
+  }
+}

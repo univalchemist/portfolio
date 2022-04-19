@@ -1,0 +1,73 @@
+.drag-handler.shared {
+  opacity: 0;
+  margin-top: -5px;
+  transition: opacity 0.2s linear;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+  height: 30px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.add-btn.shared {
+  border: none;
+  padding: 0;
+  width: unset;
+
+  &:hover {
+    div {
+      opacity: .75;
+      color: var(--color-primary)
+    }
+  }
+
+  & > div {
+      cursor: pointer;
+      transition: all .2s linear;
+      width: 40px;
+      height: 40px;
+      line-height: 36px;
+      border-radius: 50%;
+      background-color: #212428;
+      text-align: center;
+      box-shadow: var(--shadow-1);
+  }
+}
+
+.remove-btn.shared {
+  border: none;
+  padding: 0;
+  width: unset;
+  transition: transform 0.2s linear;
+
+  &:hover {
+    transform: scale(1.25);
+  }
+
+  & > div {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    line-height: 26px;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    background-color: #212428;
+    text-align: center;
+    box-shadow: var(--shadow-2);
+  }
+}
+
+.section-description {
+  text-align: left;
+  font-size: 20px;
+  color: var(--white);
+  padding: 0 30px;
+}
+
+.field-helper {
+  text-align: center;
+  font-size: 16px;
+}

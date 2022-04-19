@@ -1,0 +1,458 @@
+fragment Image on Image {
+  id
+  index
+  path
+  url
+}
+
+fragment Portfolio on Portfolio {
+  id
+  userId
+  index
+  category
+  title
+  description
+  view
+  like
+  images {
+    ...Image
+  }
+  techStacks
+  createdAt
+  updatedAt
+}
+
+fragment UserLink on UserLink {
+  index
+  name
+  url
+  visible
+}
+
+fragment Education on Education {
+  index
+  startedFrom
+  endedAt
+  title
+  at
+  description
+  degree
+  visible
+}
+
+fragment Skill on Skill {
+  index
+  name
+  category
+  rate
+  visible
+}
+
+fragment Experience on Experience {
+  index
+  startedFrom
+  endedAt
+  title
+  at
+  description
+  visible
+}
+
+fragment Interest on Interest {
+  index
+  title
+  description
+}
+
+fragment Feature on Feature {
+  id
+  userId
+  index
+  title
+  description
+  icon
+  createdAt
+  updatedAt
+}
+
+fragment Resume on Resume {
+  id
+  userId
+  description
+  education {
+    ...Education
+  }
+  skills {
+    ...Skill
+  }
+  experience {
+    ...Experience
+  }
+  interests {
+    ...Interest
+  }
+  createdAt
+  updatedAt
+}
+
+fragment Client on Client {
+  id
+  userId
+  index
+  name
+  clientInfo
+  logo {
+    ...Image
+  }
+  url
+  feedback
+  visible
+  createdAt
+  updatedAt
+}
+
+fragment User on User {
+  id
+  slug
+  firstName
+  middleName
+  lastName
+  email
+  phone
+  address
+  title
+  slogan
+  avatar {
+    ...Image
+  }
+  availability
+  bio
+  backgroundImages {
+    ...Image
+  }
+  links {
+    index
+    name
+    url
+    visible
+  }
+  active
+  createdAt
+  updatedAt
+}
+
+fragment Contact on Contact {
+  id
+  userId
+  user {
+    email
+    firstName
+    middleName
+    lastName
+  }
+  name
+  email
+  message
+  seen
+  ref
+  createdAt
+  updatedAt
+}
+
+fragment Visit on Visit {
+  id
+  from
+  userId
+  userSeen
+  userAgent
+  adminCreatedEmail
+  createdAt
+  updatedAt
+}
+
+fragment Admin on Admin {
+  id
+  email
+  type
+  tgChatId
+  createdAt
+  updatedAt
+}
+
+fragment SettingConfig on SettingConfig {
+  setting {
+    id
+    links {
+      key
+      value
+    }
+    other {
+      key
+      value
+    }
+    createdAt
+    updatedAt
+  }
+  config {
+    dropBoxToken
+    telegramToken
+  }
+}
+
+query User($idOrSlug: String!) {
+  user(idOrSlug: $idOrSlug) {
+    message
+    data {
+      ...User
+      createdBy
+    }
+  }
+}
+
+query Clients($userIdOrSlug: String!) {
+  clients(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Client
+    }
+  }
+}
+
+query Features($userIdOrSlug: String!) {
+  features(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Feature
+    }
+  }
+}
+
+query Portfolios($userIdOrSlug: String!) {
+  portfolios(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Portfolio
+    }
+  }
+}
+
+query Resume($userIdOrSlug: String!) {
+  resume(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Resume
+    }
+  }
+}
+
+query AdminUser($idOrSlug: String!) {
+  profile: user(idOrSlug: $idOrSlug) {
+    data {
+      ...User
+      createdBy
+    }
+  }
+  clients: clients(userIdOrSlug: $idOrSlug) {
+    data {
+      ...Client
+    }
+  }
+  features: features(userIdOrSlug: $idOrSlug) {
+    data {
+      ...Feature
+    }
+  }
+  portfolios: portfolios(userIdOrSlug: $idOrSlug) {
+    data {
+      ...Portfolio
+    }
+  }
+  resume: resume(userIdOrSlug: $idOrSlug) {
+    data {
+      ...Resume
+    }
+  }
+}
+
+query UserData($idOrSlug: String!) {
+  profile: user(idOrSlug: $idOrSlug) {
+    data {
+      ...User
+    }
+  }
+  clients: clients(userIdOrSlug: $idOrSlug, visible: true) {
+    data {
+      ...Client
+    }
+  }
+  features: features(userIdOrSlug: $idOrSlug) {
+    data {
+      ...Feature
+    }
+  }
+  portfolios: portfolios(userIdOrSlug: $idOrSlug) {
+    data {
+      ...Portfolio
+    }
+  }
+  resume: resume(userIdOrSlug: $idOrSlug, visible: true) {
+    data {
+      ...Resume
+    }
+  }
+}
+
+query AdminUsers($createdBy: String) {
+  users(createdBy: $createdBy) {
+    data {
+      id
+      slug
+      firstName
+      middleName
+      lastName
+      email
+      phone
+      address
+      title
+      avatar {
+        ...Image
+      }
+      active
+      createdBy
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+query AdminClients($userIdOrSlug: String!) {
+  clients(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Client
+    }
+  }
+}
+
+query AdminFeatures($userIdOrSlug: String!) {
+  features(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Feature
+    }
+  }
+}
+
+query AdminPortfolios($userIdOrSlug: String!) {
+  portfolios(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Portfolio
+    }
+  }
+}
+
+query AdminResume($userIdOrSlug: String!) {
+  resume(userIdOrSlug: $userIdOrSlug) {
+    message
+    status
+    data {
+      ...Resume
+    }
+  }
+}
+
+query Admins {
+  admins {
+    message
+    status
+    data {
+      ...Admin
+    }
+  }
+}
+
+query AdminContacts {
+  contacts {
+    message
+    status
+    data {
+      ...Contact
+    }
+  }
+}
+
+query Visits($dateRange: [String!], $createdBy: String, $userId: String) {
+  visits(dateRange: $dateRange, createdBy: $createdBy, userId: $userId) {
+    message
+    status
+    data {
+      ...Visit
+    }
+  }
+}
+
+query DashboardData($currentAdmin: String!, $dateRange: [String!]) {
+  admins {
+    data {
+      id
+    }
+  }
+  users {
+    data {
+      createdBy
+    }
+  }
+  contacts(onlyNew: true) {
+    data {
+      id
+    }
+  }
+  visits(dateRange: $dateRange, createdBy: $currentAdmin) {
+    data {
+      userSeen
+      from
+      createdAt
+    }
+  }
+}
+
+query VisitFilterUserData($createdBy: String!) {
+  users(createdBy: $createdBy) {
+    data {
+      id
+      firstName
+      middleName
+      lastName
+    }
+  }
+}
+
+query AdminSetting {
+  setting {
+    message
+    status
+    data {
+      ...SettingConfig
+    }
+  }
+}
+
+subscription ContactAdded {
+  contactAdded {
+    ...Contact
+  }
+}
+
+subscription TgChatIdUpdated {
+  tgChatIdUpdated {
+    ...Admin
+  }
+}

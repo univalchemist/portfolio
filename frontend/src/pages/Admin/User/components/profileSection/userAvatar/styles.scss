@@ -1,0 +1,24 @@
+.avatar-container {
+  position: relative;
+  overflow: hidden;
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  box-shadow: var(--shadow-1);
+
+  &:hover {
+    .edit-image-container {
+      opacity: 1;
+    }
+  }
+
+  .user-avatar {
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+}

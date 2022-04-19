@@ -1,0 +1,63 @@
+.user-portfolios-container {
+  .portfolio-row {
+    border: 1px dashed transparent;
+    border-radius: 3px;
+    &:hover {
+      .portfolio-item {
+        transform: scale(1.005);
+        box-shadow: 10px 10px 19px #1c1e22, -10px -10px 19px #262a2e;
+      }
+      .drag-handler {
+        opacity: 1;
+      }
+    }
+    &.dragging {
+      border-color: #ff014f;
+      opacity: 0.5;
+      .drag-handler {
+        opacity: 1;
+      }
+      & ~ .portfolio-row {
+        border-color: #212428;
+      }
+    }
+    .portfolio-item {
+      cursor: pointer;
+      transition: transform 0.2s linear;
+      .image-container {
+        height: 60px;
+        width: 80px;
+    
+        & > img {
+          height: 100%;
+          width: 100%;
+          border-radius: 5px;
+        }
+      }
+      .info-row {
+        height: 100%;
+        align-items: center;
+        overflow: hidden;
+    
+        .title {
+          font-size: 20px;
+  
+          .category {
+            color: #ff014f;
+          }
+        }
+        .description {
+          font-size: 18px !important;
+          width: 100%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+.portfolio-form-modal {
+  max-height: 65vh;
+  overflow-y: auto;
+}

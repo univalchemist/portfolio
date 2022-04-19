@@ -1,0 +1,27 @@
+.telegram-button {
+  cursor: pointer;
+  border-radius: 6px;
+  box-shadow: var(--shadow-1);
+  overflow: hidden;
+  a {
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+    padding: 20px 20px;
+
+    &:hover, &:focus, &:active {
+      color: #FFFFFF !important;
+    }
+
+    &.tg-disconnected {
+      background: var(--toastify-color-info);
+    }
+    &.tg-connected {
+      background: var(--toastify-icon-color-error);
+    }
+    span {
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}

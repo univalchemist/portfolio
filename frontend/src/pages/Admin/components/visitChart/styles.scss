@@ -1,0 +1,25 @@
+.custom-chart-tooltip {
+  background-color: #12141595;
+  padding: 5px 0;
+  border-radius: 5px;
+
+  .chart-info-container {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #121415;
+    padding: 3px 10px;
+    &:last-of-type {
+      border-bottom-color: transparent;
+    }
+    .chart-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+    .chart-desc {
+      font-size: 12px;
+      font-weight: 400;
+      padding: 0 3px;
+    }
+  }
+}

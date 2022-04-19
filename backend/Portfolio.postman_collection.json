@@ -1,0 +1,2326 @@
+{
+	"info": {
+		"_postman_id": "3d07b74d-751f-4c98-8eb7-822679e2dc91",
+		"name": "Portfolio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"const res = JSON.parse(responseBody);\r",
+							"const token = res.data.login.data.accessToken;\r",
+							"pm.environment.set(\"token\", token);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation Login($email: String!, $password: String!) {\r\n  login(email: $email, password:  $password) {\r\n    data {\r\n      accessToken\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"email\": \"fatpig0416@gmail.com\",\r\n    \"password\": \"caixia0416\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Me(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"const res = JSON.parse(responseBody);\r",
+							"const userId = res.data.me.data.id;\r",
+							"pm.environment.set(\"userId\", userId);\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Me {\r\n  me {\r\n    message\r\n    data {\r\n      id\r\n      email\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAdmin(SuperAdmin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreatedAdmin($input: AdminInput!) {\r\n  createAdmin(input: $input) {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      email\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"email\": \"fatpig0419@gmail.com\",\r\n        \"password\": \"caixia0416\",\r\n        \"type\": \"ADMIN\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteAdmin(SuperAdmin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteAdmin($id: String!) {\r\n  deleteAdmin(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61be259523499dcef3f45cd4\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Admins",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Admins {\r\n  admins {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      email\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateUser(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateUser($input: UserInput!) {\r\n  createUser(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      firstName\r\n      middleName\r\n      lastName\r\n      email\r\n      phone\r\n      title\r\n      avatar\r\n      backgroundImages {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      bio\r\n      links {\r\n        id\r\n        index\r\n        name\r\n        url\r\n        visible\r\n      }\r\n      active\r\n      theme\r\n      createdBy\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"firstName\": \"Che\",\r\n        \"lastName\": \"Yunlai\",\r\n        \"email\": \"fatpig0419@gmail.com\",\r\n        \"phone\": \"+8618342422743\",\r\n        \"title\": \"Web & Mobile app developer\",\r\n        \"bio\": \"I have 6years of experience.\",\r\n        \"theme\": \"default\",\r\n        \"active\": true\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Users",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Users {\r\n  users {\r\n    data {\r\n      id\r\n      firstName\r\n      middleName\r\n      lastName\r\n      email\r\n      phone\r\n      title\r\n      avatar\r\n      backgroundImages {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      bio\r\n      links {\r\n        id\r\n        index\r\n        name\r\n        url\r\n        visible\r\n      }\r\n      active\r\n      theme\r\n      createdBy\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query User($id: String!) {\r\n  user(id: $id) {\r\n    message\r\n    data {\r\n      id\r\n      firstName\r\n      middleName\r\n      lastName\r\n      email\r\n      phone\r\n      title\r\n      avatar\r\n      backgroundImages {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      bio\r\n      links {\r\n        id\r\n        index\r\n        name\r\n        url\r\n        visible\r\n      }\r\n      active\r\n      theme\r\n      createdBy\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61be10f7fb7355454259de9d\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateUser(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdateUser($id: String!, $input: UserInput!) {\r\n  updateUser(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      firstName\r\n      middleName\r\n      lastName\r\n      email\r\n      phone\r\n      title\r\n      avatar\r\n      backgroundImages {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      bio\r\n      links {\r\n        id\r\n        index\r\n        name\r\n        url\r\n        visible\r\n      }\r\n      active\r\n      theme\r\n      createdBy\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61be10f7fb7355454259de9d\",\r\n    \"input\": {\r\n        \"firstName\": \"Che\",\r\n        \"lastName\": \"Yunlai\",\r\n        \"email\": \"fatpig0416@gmail.com\",\r\n        \"phone\": \"+8618342422743\",\r\n        \"title\": \"Web & Mobile app developer\",\r\n        \"bio\": \"I have 6years of experience.\",\r\n        \"theme\": \"default\",\r\n        \"active\": true\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DuplicateUser(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DuplicateUser($id: String!) {\r\n  duplicateUser(id: $id) {\r\n    status\r\n    message\r\n    data {\r\n        id\r\n      firstName\r\n      middleName\r\n      lastName\r\n      email\r\n      phone\r\n      title\r\n      avatar\r\n      backgroundImages {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      bio\r\n      links {\r\n        id\r\n        index\r\n        name\r\n        url\r\n        visible\r\n      }\r\n      active\r\n      theme\r\n      createdBy\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61be10f7fb7355454259de9d\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteUser(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteUser($id: String!) {\r\n  deleteUser(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c196d9ad03d314eac9458c\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteFreeUsers(SuperAdmin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteFreeUsers {\r\n  deleteFreeUsers {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateFeature(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateFeature($input: FeatureInput!) {\r\n  createFeature(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      title\r\n      description\r\n      id\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"userId\": \"61c194386b04158e7f8d50d6\",\r\n        \"title\": \"Web development\",\r\n        \"description\": \"I provide web app with perfect result.\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Features",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Features($userId: String!) {\r\n  features(userId: $userId) {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      userId\r\n      title\r\n      description\r\n      icon\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"userId\": \"{{userId}}\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateFeature(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdateFeature($id: String!, $input: FeatureInput!) {\r\n  updateFeature(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      title\r\n      description\r\n      id\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61be22bb23499dcef3f45cca\",\r\n    \"input\": {\r\n        \"userId\": \"{{userId}}\",\r\n        \"title\": \"Web development0\",\r\n        \"description\": \"I provide web app with perfect result.\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteFeature(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteFeature($id: String!) {\r\n  deleteFeature(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61be22bb23499dcef3f45cca\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePortfolio(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateFeature($input: PortfolioCreateInput!) {\r\n  createPortfolio(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      category\r\n      title\r\n      description\r\n      view\r\n      like\r\n      images {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"userId\": \"61c194386b04158e7f8d50d6\",\r\n        \"index\": 0,\r\n        \"category\": \"Web\",\r\n        \"title\": \"Web development\",\r\n        \"description\": \"I provide the best web site\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Portfolios",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Portfolios($userId: String!) {\r\n  portfolios(userId: $userId) {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      userId\r\n      title\r\n      description\r\n      icon\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"userId\": \"{{userId}}\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdatePortfolio(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdateFeature($id: String!, $input: PortfolioUpdateInput!) {\r\n  updatePortfolio(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      category\r\n      title\r\n      description\r\n      view\r\n      like\r\n      images {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0a0ba4a74bd018818f16d\",\r\n    \"input\": {\r\n        \"index\": 1\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IncreasePortfolioViews(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation IncreasePortfolioViews($id: String!) {\r\n  increasePortfolioViews(id: $id) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      category\r\n      title\r\n      description\r\n      view\r\n      like\r\n      images {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0a0ba4a74bd018818f16d\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "IncreasePortfolioLikes(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation IncreasePortfolioLikes($id: String!) {\r\n  increasePortfolioLikes(id: $id) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      category\r\n      title\r\n      description\r\n      view\r\n      like\r\n      images {\r\n        id\r\n        index\r\n        url\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0a0ba4a74bd018818f16d\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeletePortfolio(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeletePortfolio($id: String!) {\r\n  deletePortfolio(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0a0ba4a74bd018818f16d\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateResume(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateResume($input: ResumeInput!) {\r\n  createResume(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      education {\r\n          index\r\n          startedFrom\r\n          endedAt\r\n          title\r\n          at\r\n          description\r\n          degree\r\n          visible\r\n      }\r\n      skills {\r\n          name\r\n          category\r\n          rate\r\n          visible\r\n      }\r\n      experience {\r\n          index\r\n          startedFrom\r\n          endedAt\r\n          title\r\n          at\r\n          description\r\n          visible\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"userId\": \"61c194386b04158e7f8d50d6\",\r\n        \"education\": [{\r\n            \"index\": 0,\r\n            \"startedFrom\": \"2016.12.13\",\r\n            \"endedAt\": \"2018.04.13\",\r\n            \"title\": \"Personal Portfolio April Fools\",\r\n            \"at\": \"NothEathern university\",\r\n            \"description\": \"The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.\",\r\n            \"degree\": \"Bachelor\",\r\n            \"visible\": true\r\n        }],\r\n        \"skills\": [{\r\n            \"index\": 0,\r\n            \"name\": \"React\",\r\n            \"category\": \"Frontend\",\r\n            \"rate\": 9,\r\n            \"visible\": true\r\n        }],\r\n        \"experience\": [{\r\n            \"index\": 0,\r\n            \"startedFrom\": \"2016.12.13\",\r\n            \"endedAt\": \"2018.04.13\",\r\n            \"title\": \"fill-stack developer\",\r\n            \"at\": \"Cuberfuze\",\r\n            \"description\": \"I had a role of mobile head in this company.\",\r\n            \"visible\": true\r\n        }]\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resume",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Resume($userId: String!) {\r\n  resume(userId: $userId) {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      userId\r\n      education {\r\n          index\r\n          startedFrom\r\n          endedAt\r\n          title\r\n          at\r\n          description\r\n          degree\r\n          visible\r\n      }\r\n      skills {\r\n          name\r\n          category\r\n          rate\r\n          visible\r\n      }\r\n      experience {\r\n          index\r\n          startedFrom\r\n          endedAt\r\n          title\r\n          at\r\n          description\r\n          visible\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"userId\": \"{{userId}}\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateResume(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation updateResume($id: String!, $input: ResumeInput!) {\r\n  updateResume(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      education {\r\n          index\r\n          startedFrom\r\n          endedAt\r\n          title\r\n          at\r\n          description\r\n          degree\r\n          visible\r\n      }\r\n      skills {\r\n          name\r\n          category\r\n          rate\r\n          visible\r\n      }\r\n      experience {\r\n          index\r\n          startedFrom\r\n          endedAt\r\n          title\r\n          at\r\n          description\r\n          visible\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0c5ffa8f86cd11c5dd36c\",\r\n    \"input\": {\r\n        \"userId\": \"{{userId}}\",\r\n        \"education\": [{\r\n            \"index\": 0,\r\n            \"startedFrom\": \"2016.12.13\",\r\n            \"endedAt\": \"2018.04.13\",\r\n            \"title\": \"Personal Portfolio April Fools.\",\r\n            \"at\": \"NothEathern university\",\r\n            \"description\": \"The education should be very interactual. Ut tincidunt est ac dolor aliquam sodales. Phasellus sed mauris hendrerit, laoreet sem in, lobortis mauris hendrerit ante.\",\r\n            \"degree\": \"Bachelor\",\r\n            \"visible\": true\r\n        }],\r\n        \"skills\": [{\r\n            \"index\": 0,\r\n            \"name\": \"React\",\r\n            \"category\": \"Frontend\",\r\n            \"rate\": 9,\r\n            \"visible\": true\r\n        }],\r\n        \"experience\": [{\r\n            \"index\": 0,\r\n            \"startedFrom\": \"2016.12.13\",\r\n            \"endedAt\": \"2018.04.13\",\r\n            \"title\": \"fill-stack developer\",\r\n            \"at\": \"Cuberfuze\",\r\n            \"description\": \"I had a role of mobile head in this company.\",\r\n            \"visible\": true\r\n        }]\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteResume(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteResume($id: String!) {\r\n  deleteResume(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0a0ba4a74bd018818f16d\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateInterest(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateInterest($input: InterestInput!) {\r\n  createInterest(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      title\r\n      description\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"userId\": \"61c194386b04158e7f8d50d6\",\r\n        \"index\": 0,\r\n        \"title\": \"Deep Learning\",\r\n        \"description\": \"I am very interested in DL and am already on a junior level.\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Interests",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Interests($userId: String!) {\r\n  interests(userId: $userId) {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      title\r\n      description\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"userId\": \"{{userId}}\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateInterest(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdateInterest($id: String!, $input: InterestInput!) {\r\n  updateInterest(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      title\r\n      description\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0d36157ab72e7d8dec162\",\r\n    \"input\": {\r\n        \"userId\": \"{{userId}}\",\r\n        \"index\": 1,\r\n        \"title\": \"Deep Learning\",\r\n        \"description\": \"I am very interested in DL and am already on a junior level.\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteInterest(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteInterest($id: String!) {\r\n  deleteInterest(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0d36157ab72e7d8dec162\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateClient(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateClient($input: ClientInput!) {\r\n  createClient(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      name\r\n      logo\r\n      feedback\r\n      visible\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"userId\": \"61c194386b04158e7f8d50d6\",\r\n        \"index\": 0,\r\n        \"name\": \"Zayzoon\",\r\n        \"feedback\": \"Che did a great job.\",\r\n        \"visible\": true\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Clients",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Clients($userId: String!) {\r\n  clients(userId: $userId) {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      name\r\n      logo\r\n      feedback\r\n      visible\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"userId\": \"{{userId}}\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateClient(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdateClient($id: String!, $input: ClientInput!) {\r\n  updateClient(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      index\r\n      name\r\n      logo\r\n      feedback\r\n      visible\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0e95d221ee95071613491\",\r\n    \"input\": {\r\n        \"userId\": \"{{userId}}\",\r\n        \"index\": 0,\r\n        \"name\": \"Zayzoon\",\r\n        \"feedback\": \"Li did a great job.\",\r\n        \"visible\": true\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteClient(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteClient($id: String!) {\r\n  deleteClient(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0e95d221ee95071613491\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateSetting(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateSetting($input: SettingInput!) {\r\n  createSetting(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      links {\r\n          key\r\n          value\r\n      }\r\n      other {\r\n          key\r\n          value\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"links\": [\r\n            {\r\n                \"key\": \"Facebook\",\r\n                \"value\": 1\r\n            },\r\n            {\r\n                \"key\": \"LinkedIn\",\r\n                \"value\": 1\r\n            }\r\n        ],\r\n        \"other\": [{\r\n            \"key\": \"prop1\",\r\n            \"value\": 1\r\n        }]\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Setting",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Setting {\r\n  setting {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      links {\r\n          key\r\n          value\r\n      }\r\n      other {\r\n          key\r\n          value\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateSetting(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdateSetting($id: String!, $input: SettingInput!) {\r\n  updateSetting(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      links {\r\n          key\r\n          value\r\n      }\r\n      other {\r\n          key\r\n          value\r\n      }\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0f9dbde9b165b0e702cdb\",\r\n    \"input\": {\r\n        \"links\": [\r\n            {\r\n                \"key\": \"Facebook\",\r\n                \"value\": 1\r\n            },\r\n            {\r\n                \"key\": \"LinkedIn\",\r\n                \"value\": 0\r\n            }\r\n        ],\r\n        \"other\": [{\r\n            \"key\": \"prop1\",\r\n            \"value\": 1\r\n        }]\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteSetting(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteSetting($id: String!) {\r\n  deleteSetting(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c0f9dbde9b165b0e702cdb\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateContact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation CreateContact($input: ContactInput!) {\r\n  createContact(input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      email\r\n      message\r\n      seen\r\n      from\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"input\": {\r\n        \"userId\": \"61c194386b04158e7f8d50d6\",\r\n        \"email\": \"customer@gmail.com\",\r\n        \"message\": \"I'd like to contact with you.\",\r\n        \"from\": \"guru\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contacts(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query Contacts {\r\n  contacts {\r\n    message\r\n    status\r\n    data {\r\n      id\r\n      userId\r\n      email\r\n      message\r\n      seen\r\n      from\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateContact",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation UpdateContact($id: String!, $input: ContactInput!) {\r\n  updateContact(id: $id, input: $input) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      email\r\n      message\r\n      seen\r\n      from\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c15b3ebc85a24c6fb66e0a\",\r\n    \"input\": {\r\n        \"userId\": \"{{userId}}\",\r\n        \"email\": \"customer@gmail.com\",\r\n        \"message\": \"I'd like to contact with you.\",\r\n        \"from\": \"freelancer\"\r\n    }\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteContact(Admin)",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation DeleteContact($id: String!) {\r\n  deleteContact(id: $id) {\r\n    status\r\n    message\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c15b3ebc85a24c6fb66e0a\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MakeContactSeen",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "mutation MakeContactSeen($id: String!) {\r\n  makeContactSeen(id: $id) {\r\n    status\r\n    message\r\n    data {\r\n      id\r\n      userId\r\n      email\r\n      message\r\n      seen\r\n      from\r\n      createdAt\r\n      updatedAt\r\n    }\r\n  }\r\n}",
+						"variables": "{\r\n    \"id\": \"61c159f2dbd38b347f8540ff\"\r\n}"
+					}
+				},
+				"url": {
+					"raw": "{{URL}}/graphql",
+					"host": [
+						"{{URL}}"
+					],
+					"path": [
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

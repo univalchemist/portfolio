@@ -1,0 +1,33 @@
+.sk-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &.sk-left {
+    justify-content: left;
+  }
+  &.sk-right {
+    justify-content: right;
+  }
+  &.sk-center {
+    justify-content: center;
+  }
+
+  .sk-item {
+    &.sk-xl {
+      width: 100%
+    }
+    &.sk-lg {
+      width: 75%
+    }
+    &.sk-md {
+      width: 50%
+    }
+    &.sk-sm {
+      width: 30%
+    }
+    &.sk-xs {
+      width: 15%
+    }
+  }
+}
